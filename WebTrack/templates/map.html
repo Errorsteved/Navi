@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    <title>地图</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="//cache.amap.com/lbs/static/es5.min.js"></script>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: "8d159a51e9df979d72998fb565a29db4",
+        };
+    </script>
+    <script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=2.0&key=d5b2f02513384552c4bb3c8cda4707b5&plugin=AMap.Scale,AMap.HawkEye,AMap.ToolBar,AMap.ControlBar,AMap.Driving"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+    <script>
+        AMap.plugin('AMap.Geocoder', function () {
+        });
+    </script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+
+<body>
+    <div id="container" style="width: 100%; height: 100%;"></div>
+    <div class="input-card" style="width: 250px; z-index: 999;">
+        <h4>路径规划</h4>
+        <div class="input-item">
+            <label>出发地：</label>
+            <input type="text" id="start" placeholder="如：哈尔滨理工大学" oninput="clearStartCoord()">
+            <input type="hidden" id="start-coord">
+            <button onclick="useCurrentLocation()">使用当前位置</button>
+        </div>
+        <div class="input-item">
+            <label>目的地：</label>
+            <input type="text" id="end" placeholder="如：哈尔滨工业大学">
+        </div>
+        <div class="input-item">
+            <button onclick="planRoute()">开始路径规划</button>
+        </div>
+        <div class="input-item">
+            <button onclick="startTrip()">出发</button>
+            <button onclick="cancelTrip()">取消行程</button>
+        </div>
+        <hr>
+        <div class="input-item"><input type="checkbox" onclick="toggleScale(this)" /> 比例尺</div>
+        <div class="input-item"><input type="checkbox" id="toolbar" onclick="toggleToolBar(this)" /> 工具条</div>
+        <div class="input-item"><input type="checkbox" id="controlBar" onclick="toggleControlBar(this)" /> 方向盘</div>
+        <div class="input-item"><input type="checkbox" id="overview" checked onclick="toggleOverViewShow(this)" /> 鹰眼</div>
+    </div>
+    <div id="floating-window">
+        <h4>车辆状态</h4>
+        <table id="data-table">
+            <!-- 动态填充 -->
+        </table>
+        <button onclick="startMQTT()">开始接收 MQTT 数据</button>
+        <button onclick="stopMQTT()">停止接收</button>
+    </div>
+    <div id="panel"></div>
+    <button onclick="refreshPath()" class="refresh-btn">刷新轨迹</button>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+int8 command
+
+int8 STOP = 0
+int8 FORWARD = 1
+int8 BACKWARD = 2
+int8 FORWARD_LEFT = 3
+int8 FORWARD_RIGHT = 4
+int8 LEFT_BACK = 5
+int8 RIGHT_BACK = 6

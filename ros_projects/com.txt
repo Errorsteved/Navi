@@ -1,0 +1,26 @@
+root@ubuntu:/# ros2 run camera_calibration cameracalibrator --size 9x6 --square 0.025 --camera_name mycam --ros-args -r image:/image_raw -r camera_info:/camera_info
+Traceback (most recent call last):
+  File "/opt/ros/foxy/lib/camera_calibration/cameracalibrator", line 11, in <module>
+    load_entry_point('camera-calibration==2.3.0', 'console_scripts', 'cameracalibrator')()
+  File "/opt/ros/foxy/lib/python3.8/site-packages/camera_calibration/nodes/cameracalibrator.py", line 87, in main
+    options, _ = parser.parse_args(rclpy.utilities.remove_ros_args())
+  File "/opt/ros/foxy/lib/python3.8/site-packages/rclpy/utilities.py", line 45, in remove_ros_args
+    return rclpy_implementation.rclpy_remove_ros_args(
+_rclpy.RCLError: Failed to init: Couldn't parse remap rule: '-r image:/image_raw'. Error: Expected lexeme type (19) not found, search ended at index 16, at /tmp/binarydeb/ros-foxy-rcl-1.1.14/src/rcl/lexer_lookahead.c:239, at /tmp/binarydeb/ros-foxy-rcl-1.1.14/src/rcl/arguments.c:353
+root@ubuntu:/# ros2 run camera_calibration cameracalibrator --size 9x6 --square 0.025 --camera_name mycam --ros-args -r image:=/image_raw -r camera_info:=/camera_info
+Waiting for service camera/set_camera_info ...
+OK
+Waiting for service left_camera/set_camera_info ...
+OK
+Waiting for service right_camera/set_camera_info ...
+OK
+qt.qpa.xcb: could not connect to display 
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "/usr/local/lib/python3.8/dist-packages/cv2/qt/plugins" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: xcb.
+
+
+
+ros2 run camera_calibration cameracalibrator --size 9x6 --square 0.025 --camera_name mycam --ros-args -r image:=/image_raw -r camera_info:=/camera_info
+ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[1920, 1080]" -p pixel_format:="YUYV"
